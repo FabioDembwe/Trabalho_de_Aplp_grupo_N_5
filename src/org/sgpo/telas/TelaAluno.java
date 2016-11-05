@@ -5,6 +5,7 @@
  */
 package org.sgpo.telas;
 
+import java.awt.HeadlessException;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import org.sgpo.dal.ModuloConexao;
@@ -27,7 +28,8 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
     public TelaAluno() {
         initComponents();
         conexao = ModuloConexao.conector();
-        //this.comboBusca();
+        this.comboBusca();
+        this.comboBusca2();
     }
 
     public void comboBusca() {
@@ -44,27 +46,40 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
-    
-     
+
+    public void comboBusca2() {
+        String sql = "select * from universidade";
+
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                comboUniversidadeAluno.addItem(rs.getString(1));
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
     // Método Adicionar
     private void cadastrar() {
-        String sql = "insert into aluno(nome, sexo, data_nascimento, naturalidade, morada, ano_escolar, ano_lectivo, telefone, telefone_alter, email, obs, turma_idturma, turma_universidade_iduniversidade) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into aluno(nome, sexo, data_nascimento, naturalidade, morada, ano_escolar, ano_lectivo, telefone, telefone_alter, email, obs, turma_idturma, universidade_iduniversidade) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txtNomeAluno.getText());
-            pst.setString(5, comboSexoAluno.getSelectedItem().toString());
+            pst.setString(2, comboSexoAluno.getSelectedItem().toString());
             pst.setString(3, txtDnAluno.getText());
             pst.setString(4, txtNatAluno.getText());
             pst.setString(5, txtMoradaAluno.getText());
             pst.setString(6, comboAcAluno.getSelectedItem().toString());
             pst.setString(7, comboAlAluno.getSelectedItem().toString());
-            pst.setString(8, txtTelAluno.getText());
-            pst.setString(9, txtTelAltAluno.getText());
+            pst.setInt(8, txtTelAluno.getText().length());
+            pst.setInt(9, txtTelAltAluno.getText().length());
             pst.setString(10, txtEmailAluno.getText());
-            pst.setString(11, comboTurmaAluno.getSelectedItem().toString());
-            pst.setString(12, comboUniversidadeAluno.getSelectedItem().toString());
-            pst.setString(13, textSobreAluno.getText());
+            pst.setString(11, textSobreAluno.getText());
+            pst.setString(12, comboTurmaAluno.getSelectedItem().toString());
+            pst.setString(13, comboUniversidadeAluno.getSelectedItem().toString());
 
             // Validando os campos
             if (txtNomeAluno.getText().isEmpty() || txtDnAluno.getText().isEmpty() || txtNatAluno.getText().isEmpty() || txtMoradaAluno.getText().isEmpty()) {
@@ -86,8 +101,8 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
                 }
             }
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao Adicionar novo aluno!");
+        } catch (SQLException | HeadlessException e) {
+            JOptionPane.showMessageDialog(null, e);
             txtNomeAluno.setText(null);
             txtDnAluno.setText(null);
             txtNatAluno.setText(null);
@@ -259,7 +274,7 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(236, 236, 236)
                 .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 548, Short.MAX_VALUE))
+                .addGap(69, 570, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -395,7 +410,7 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(800, 800));
+        setSize(new java.awt.Dimension(822, 800));
     }// </editor-fold>//GEN-END:initComponents
 
     private void comboSexoAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboSexoAlunoActionPerformed

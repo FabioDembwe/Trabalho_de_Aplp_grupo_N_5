@@ -1,0 +1,11 @@
+Para usar a aplicação certifique que:
+	1. Tem uma versão de servidor mysql instalada;
+	3. Tem uma versão do Netbeans 7.X;
+	4. Abra o arquivo bd-SGPO V3 copie o script e cole no shell do mysql;
+	5. Execute a aplicação no Netbeans;
+	6. Insira o nome de utilizar (admin) e senha (admin).
+
+	OBS: 
+	Antes de executar a aplicação certique-se que o servidor mysql esteja ligado;
+	O Ficheiro bd-SGPO V3.sql pode ser aberto com o bloco de notas, worbench ou 
+	qualquer outra aplicação de desenvolvimento de base de dados

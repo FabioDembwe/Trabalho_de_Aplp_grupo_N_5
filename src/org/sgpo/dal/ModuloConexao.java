@@ -29,7 +29,7 @@ public class ModuloConexao {
             Class.forName(driver);
             conexao = DriverManager.getConnection(url, user, password);
             return conexao;
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException e) {
             
             System.out.println(e);
             return null;
