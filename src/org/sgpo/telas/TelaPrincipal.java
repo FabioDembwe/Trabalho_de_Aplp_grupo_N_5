@@ -73,7 +73,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
         desktopLayout.setVerticalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 647, Short.MAX_VALUE)
+            .addGap(0, 711, Short.MAX_VALUE)
         );
 
         jToolBar1.setRollover(true);
@@ -224,13 +224,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void MenOpcUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenOpcUsuActionPerformed
         // Para chamar o forme tela usuario dentro da tela principal:
-        TelaUsuario usuario = new TelaUsuario();
-        usuario.setVisible(true);
-        desktop.add(usuario);
+        TelaUniversidade universidade = new TelaUniversidade();
+        universidade.setVisible(true);
+        desktop.add(universidade);
     }//GEN-LAST:event_MenOpcUsuActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
+
+        TelaTurma turma = new TelaTurma();
+        turma.setVisible(true);
+        desktop.add(turma);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
