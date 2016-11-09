@@ -89,6 +89,11 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         btnatualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/sgpo/icon/atualizar.png"))); // NOI18N
         btnatualizar.setToolTipText("Actualizar");
         btnatualizar.setPreferredSize(new java.awt.Dimension(80, 80));
+        btnatualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnatualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -179,6 +184,10 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     private void txtemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtemailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtemailActionPerformed
+
+    private void btnatualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnatualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnatualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
