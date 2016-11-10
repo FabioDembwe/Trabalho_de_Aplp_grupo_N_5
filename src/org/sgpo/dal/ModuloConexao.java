@@ -6,6 +6,8 @@
 package org.sgpo.dal;
 
 import java.sql.*;
+import java.util.Vector;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,15 +26,16 @@ public class ModuloConexao {
         String user = "root";
         String password = "";
         //Estabelecendo a conexao com o banco
-         
+
         try {
             Class.forName(driver);
             conexao = DriverManager.getConnection(url, user, password);
             return conexao;
         } catch (ClassNotFoundException | SQLException e) {
-            
+
             System.out.println(e);
             return null;
         }
     }
+
 }

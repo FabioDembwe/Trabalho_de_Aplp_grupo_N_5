@@ -302,7 +302,6 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
         jLabel20 = new javax.swing.JLabel();
         lblCurso = new javax.swing.JLabel();
         comboCurso = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -433,13 +432,6 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
         comboCurso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         comboCurso.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jButton1.setText("Ver Todos Alunos");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -516,8 +508,7 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
                             .addComponent(txtNomeAluno)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1)))))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(55, 55, 55))
             .addGroup(layout.createSequentialGroup()
                 .addGap(236, 236, 236)
@@ -530,8 +521,7 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
                 .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(txtIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -626,13 +616,6 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
         eliminar();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        TelaListaAluno aluno1 = new TelaListaAluno();
-        aluno1.setVisible(true);
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
@@ -646,7 +629,6 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> comboTurmaAluno;
     private javax.swing.JComboBox<String> comboUniversidadeAluno;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;

@@ -150,6 +150,9 @@ public class TelaUniversidade extends javax.swing.JInternalFrame {
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Impossível apagar Universidade, Verifique se está sendo usada ou conecte a Base de Dados \n " + e);
+                txtNome.setText(null);
+                txtCgc.setText("0");
+                txtObs.setText(null);
             }
         }
     }
