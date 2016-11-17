@@ -1,7 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Documentação do Pacote package org.sgpo.telas
+ * Neste Pacote constam todos Metodos das Classes Telas de Alunos, Cursos, Universidade, Turmas, Provas, Trabalhos ou Avaliações,
+ * e Telas de Consultas ou Listas.
  */
 package org.sgpo.telas;
 
@@ -13,8 +13,17 @@ import javax.swing.JOptionPane;
 import org.sgpo.dal.ModuloConexao;
 
 /**
+ * Documentação da Classe org.sgpo.telas.TelaAluno
  *
- * @author Inc Tec
+ * @Baldina
+ * @Fernando
+ * @Fábio
+ * @Maquinha
+ * @Lina
+ * @Lidia
+ * @Josias
+ * @Ernesto
+ * @version 1.0 Copyrigt 2016
  */
 public final class TelaAluno extends javax.swing.JInternalFrame {
 
@@ -25,7 +34,7 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
     ResultSet rs2 = null;
 
     /**
-     * Creates new form TelaAluno
+     * Criando Novo Formulário TelaAluno
      */
     public TelaAluno() {
         initComponents();
@@ -33,8 +42,14 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
         this.comboBusca();
         this.comboBusca2();
         this.comboBusca3();
+        setaNaText();
     }
 
+    /**
+     * @param comboBusca 
+     * Este Metódo Busca Dados da Tabela Turma e insere em
+     * uma ComoBox(comboTurmaAluno)
+     */
     public void comboBusca() {
         String sql = "select * from turma";
 
@@ -50,6 +65,70 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
         }
     }
 
+    /*
+    @SetaNaText
+    Este Metódo quando é chamado, seta um texto neste caso o nome da turma quando o ID é referenciado numa ComboBox(comboTurmaAluno)
+     */
+    public void setaNaText() {
+        String sql = "select * from turma where idturma = ?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, comboTurmaAluno.getSelectedItem().toString() + "");
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                txtTurma.setText(rs.getString(2));
+                if (comboTurmaAluno.getSelectedItem().toString().isEmpty()) {
+                    txtTurma.setText("Não existe Turma na Base de Dados");
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    /*
+    @SetaNaText2
+    Este Metódo quando é chamado, seta um texto neste caso o nome da Universidade quando o ID é referenciado numa ComboBox(comboTurmaAluno)
+     */
+    public void setaNaText2() {
+        String sql = "select * from universidade where iduniversidade = ?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, comboUniversidadeAluno.getSelectedItem().toString() + "");
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                txtUniversidade.setText(rs.getString(2));
+                if (comboUniversidadeAluno.getSelectedItem().toString().isEmpty()) {
+                    txtTurma.setText("Não existe Universidade na Base de Dados");
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    /*
+    @SetaNaText
+    Este Metódo quando é chamado, seta um texto neste caso o nome da Curso quando o ID é referenciado numa ComboBox(comboTurmaAluno)
+     */
+    public void setaNaText3() {
+        String sql = "select * from curso where idcurso = ?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, comboCurso.getSelectedItem().toString() + "");
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                txtCurso.setText(rs.getString(2));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    /*
+    *   @ComboBusca2;
+    *   Este Metódo Busca Dados da Tabela Turma e insere em uma ComoBox(comboTurmaAluno)
+     */
     public void comboBusca2() {
         String sql = "select * from universidade";
 
@@ -302,24 +381,35 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
         jLabel20 = new javax.swing.JLabel();
         lblCurso = new javax.swing.JLabel();
         comboCurso = new javax.swing.JComboBox<>();
+        txtTurma = new javax.swing.JTextField();
+        txtUniversidade = new javax.swing.JTextField();
+        txtCurso = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setTitle("Formulario de Alunos");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(800, 600));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("ID:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 56, -1, -1));
 
         txtIdAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txtIdAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 53, 104, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("*Nome:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 85, -1, -1));
 
         txtNomeAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txtNomeAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 82, 592, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("*Sexo:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 114, -1, -1));
 
         comboSexoAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         comboSexoAluno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
@@ -329,48 +419,155 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
                 comboSexoAlunoActionPerformed(evt);
             }
         });
+        getContentPane().add(comboSexoAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 111, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("*Data de Nasc.:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 114, -1, -1));
 
         txtDnAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txtDnAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 111, 90, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("*Naturalidade:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 114, -1, -1));
 
         txtNatAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txtNatAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 111, 252, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("*Morada:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 143, -1, -1));
 
         txtMoradaAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txtMoradaAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 140, 321, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Telefone Alternativo:");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(349, 172, -1, -1));
 
         txtTelAltAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txtTelAltAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(488, 169, 200, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Email:");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 201, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("*Ano Lectivo:");
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(533, 143, -1, -1));
 
         comboAlAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         comboAlAluno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032" }));
         comboAlAluno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(comboAlAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(628, 140, -1, -1));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel18.setText("*Turma:");
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 227, -1, -1));
 
         comboTurmaAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         comboTurmaAluno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        comboTurmaAluno.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                comboTurmaAlunoComponentAdded(evt);
+            }
+        });
+        comboTurmaAluno.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboTurmaAlunoItemStateChanged(evt);
+            }
+        });
+        comboTurmaAluno.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                comboTurmaAlunoHierarchyChanged(evt);
+            }
+        });
+        comboTurmaAluno.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                comboTurmaAlunoAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        comboTurmaAluno.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                comboTurmaAlunoMouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                comboTurmaAlunoMouseMoved(evt);
+            }
+        });
+        comboTurmaAluno.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                comboTurmaAlunoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                comboTurmaAlunoFocusLost(evt);
+            }
+        });
+        comboTurmaAluno.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                comboTurmaAlunoMouseWheelMoved(evt);
+            }
+        });
+        comboTurmaAluno.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
+            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
+                comboTurmaAlunoAncestorMoved(evt);
+            }
+            public void ancestorResized(java.awt.event.HierarchyEvent evt) {
+            }
+        });
+        comboTurmaAluno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                comboTurmaAlunoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                comboTurmaAlunoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                comboTurmaAlunoMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                comboTurmaAlunoMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                comboTurmaAlunoMouseReleased(evt);
+            }
+        });
+        comboTurmaAluno.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                comboTurmaAlunoInputMethodTextChanged(evt);
+            }
+        });
+        comboTurmaAluno.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                comboTurmaAlunoPropertyChange(evt);
+            }
+        });
+        comboTurmaAluno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                comboTurmaAlunoKeyReleased(evt);
+            }
+        });
+        comboTurmaAluno.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                comboTurmaAlunoVetoableChange(evt);
+            }
+        });
+        getContentPane().add(comboTurmaAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 227, 115, -1));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel17.setText("Telefone:");
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 172, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("*Ano Curricular:");
+        jLabel5.setText("*Ano:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(437, 143, -1, -1));
 
         comboAcAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         comboAcAluno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
@@ -380,211 +577,134 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
                 comboAcAlunoActionPerformed(evt);
             }
         });
+        getContentPane().add(comboAcAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(478, 140, 45, -1));
 
         txtEmailAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txtEmailAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 198, 592, -1));
 
         txtTelAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txtTelAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 169, 234, -1));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel19.setText("Sobre:");
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 326, -1, -1));
 
         textSobreAluno.setColumns(20);
         textSobreAluno.setRows(5);
         jScrollPane1.setViewportView(textSobreAluno);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(98, 326, 590, 112));
+
+        btnAdicionar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnAdicionar.setText("Adicionar");
+        btnAdicionar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAdicionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(106, 456, -1, -1));
 
+        btnEliminar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEliminar.setText("Eliminar");
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 456, -1, -1));
 
+        btnAlterar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnAlterar.setText("Alterar");
+        btnAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 456, -1, -1));
 
+        btnpesquisar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnpesquisar.setText("Pesquisar");
+        btnpesquisar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnpesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnpesquisarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnpesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(599, 456, -1, -1));
+        getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(236, 689, -1, -1));
 
         comboUniversidadeAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         comboUniversidadeAluno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        comboUniversidadeAluno.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboUniversidadeAlunoItemStateChanged(evt);
+            }
+        });
+        comboUniversidadeAluno.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                comboUniversidadeAlunoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                comboUniversidadeAlunoFocusLost(evt);
+            }
+        });
+        comboUniversidadeAluno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                comboUniversidadeAlunoMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                comboUniversidadeAlunoMouseExited(evt);
+            }
+        });
+        getContentPane().add(comboUniversidadeAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(341, 227, 115, -1));
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel20.setText("*Universidade:");
+        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 230, -1, -1));
 
         lblCurso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblCurso.setText("*Curso:");
+        getContentPane().add(lblCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(506, 230, -1, -1));
 
         comboCurso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         comboCurso.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(comboCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(573, 227, 115, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel18)
-                            .addComponent(jLabel20)
-                            .addComponent(lblCurso)
-                            .addComponent(jLabel19))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(comboSexoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 547, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtDnAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtNatAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtMoradaAluno)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(comboAcAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabel14)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(comboAlAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(txtTelAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jLabel10)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtTelAltAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(comboTurmaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtEmailAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(comboUniversidadeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(comboCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jScrollPane1)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnAdicionar)
-                                        .addGap(55, 55, 55)
-                                        .addComponent(btnAlterar)
-                                        .addGap(75, 75, 75)
-                                        .addComponent(btnEliminar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnpesquisar))))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(109, 109, 109)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNomeAluno)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(55, 55, 55))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(236, 236, 236)
-                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(comboSexoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtDnAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtNatAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtMoradaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(comboAcAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel14)
-                        .addComponent(comboAlAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(txtTelAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtTelAltAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(txtEmailAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(comboTurmaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(comboUniversidadeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCurso)
-                    .addComponent(comboCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel19)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnpesquisar)
-                    .addComponent(btnAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(208, 208, 208)
-                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
-        );
+        txtTurma.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtTurma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTurmaActionPerformed(evt);
+            }
+        });
+        txtTurma.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTurmaKeyReleased(evt);
+            }
+        });
+        getContentPane().add(txtTurma, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 256, 115, -1));
 
-        setSize(new java.awt.Dimension(822, 633));
+        txtUniversidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txtUniversidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(341, 256, 115, -1));
+
+        txtCurso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txtCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(573, 256, 115, -1));
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton1.setText("Ver");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, -1, -1));
+
+        getAccessibleContext().setAccessibleDescription("");
+
+        setSize(new java.awt.Dimension(762, 546));
     }// </editor-fold>//GEN-END:initComponents
 
     private void comboSexoAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboSexoAlunoActionPerformed
@@ -616,6 +736,142 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
         eliminar();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void txtTurmaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTurmaKeyReleased
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtTurmaKeyReleased
+
+    private void comboTurmaAlunoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comboTurmaAlunoKeyReleased
+        // TODO add your handling code here:
+        setaNaText();
+    }//GEN-LAST:event_comboTurmaAlunoKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        setaNaText();
+        setaNaText2();
+        setaNaText2();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void comboTurmaAlunoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTurmaAlunoItemStateChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboTurmaAlunoItemStateChanged
+
+    private void comboTurmaAlunoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_comboTurmaAlunoPropertyChange
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboTurmaAlunoPropertyChange
+
+    private void comboTurmaAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboTurmaAlunoMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboTurmaAlunoMouseClicked
+
+    private void comboTurmaAlunoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboTurmaAlunoMouseReleased
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboTurmaAlunoMouseReleased
+
+    private void comboTurmaAlunoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboTurmaAlunoMouseExited
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboTurmaAlunoMouseExited
+
+    private void comboTurmaAlunoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboTurmaAlunoMouseEntered
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboTurmaAlunoMouseEntered
+
+    private void comboTurmaAlunoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboTurmaAlunoMousePressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboTurmaAlunoMousePressed
+
+    private void comboTurmaAlunoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboTurmaAlunoMouseMoved
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboTurmaAlunoMouseMoved
+
+    private void comboTurmaAlunoMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboTurmaAlunoMouseDragged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboTurmaAlunoMouseDragged
+
+    private void comboTurmaAlunoInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_comboTurmaAlunoInputMethodTextChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboTurmaAlunoInputMethodTextChanged
+
+    private void comboTurmaAlunoHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_comboTurmaAlunoHierarchyChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboTurmaAlunoHierarchyChanged
+
+    private void comboTurmaAlunoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_comboTurmaAlunoAncestorAdded
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboTurmaAlunoAncestorAdded
+
+    private void comboTurmaAlunoComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_comboTurmaAlunoComponentAdded
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboTurmaAlunoComponentAdded
+
+    private void comboTurmaAlunoMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_comboTurmaAlunoMouseWheelMoved
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboTurmaAlunoMouseWheelMoved
+
+    private void comboTurmaAlunoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboTurmaAlunoFocusGained
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboTurmaAlunoFocusGained
+
+    private void comboTurmaAlunoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboTurmaAlunoFocusLost
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboTurmaAlunoFocusLost
+
+    private void comboTurmaAlunoAncestorMoved(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_comboTurmaAlunoAncestorMoved
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboTurmaAlunoAncestorMoved
+
+    private void comboTurmaAlunoVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_comboTurmaAlunoVetoableChange
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboTurmaAlunoVetoableChange
+
+    private void txtTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTurmaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTurmaActionPerformed
+
+    private void comboUniversidadeAlunoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboUniversidadeAlunoItemStateChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboUniversidadeAlunoItemStateChanged
+
+    private void comboUniversidadeAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboUniversidadeAlunoMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboUniversidadeAlunoMouseClicked
+
+    private void comboUniversidadeAlunoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboUniversidadeAlunoMouseExited
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboUniversidadeAlunoMouseExited
+
+    private void comboUniversidadeAlunoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboUniversidadeAlunoFocusGained
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_comboUniversidadeAlunoFocusGained
+
+    private void comboUniversidadeAlunoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboUniversidadeAlunoFocusLost
+        // TODO add your handling code here:
+        setaNaText2();
+    }//GEN-LAST:event_comboUniversidadeAlunoFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
@@ -629,6 +885,7 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> comboTurmaAluno;
     private javax.swing.JComboBox<String> comboUniversidadeAluno;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -647,6 +904,7 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCurso;
     private javax.swing.JTextArea textSobreAluno;
+    private javax.swing.JTextField txtCurso;
     private javax.swing.JTextField txtDnAluno;
     private javax.swing.JTextField txtEmailAluno;
     private javax.swing.JTextField txtIdAluno;
@@ -655,5 +913,7 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNomeAluno;
     private javax.swing.JTextField txtTelAltAluno;
     private javax.swing.JTextField txtTelAluno;
+    private javax.swing.JTextField txtTurma;
+    private javax.swing.JTextField txtUniversidade;
     // End of variables declaration//GEN-END:variables
 }
