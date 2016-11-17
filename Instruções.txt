@@ -4,6 +4,7 @@ Para usar a aplicação certifique que:
 	4. Abra o arquivo bd-SGPO V3 copie o script e cole no shell do mysql;
 	5. Execute a aplicação no Netbeans;
 	6. Insira o nome de utilizar (admin) e senha (admin).
+	7. Importar a Biblioteca rs2.xml.jar
 
 	OBS: 
 	Antes de executar a aplicação certique-se que o servidor mysql esteja ligado;

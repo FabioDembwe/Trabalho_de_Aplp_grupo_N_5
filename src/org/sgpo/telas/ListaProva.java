@@ -32,7 +32,7 @@ public class ListaProva extends javax.swing.JInternalFrame {
     }
     
     private void pesquisaProva1(){
-        String sql ="select * from prova where aluno_idaluno like ?";
+        String sql ="select aluno.idaluno as ID_Aluno, aluno.nome as Nome, disciplina.nome as Disciplina, prova.nota as Nota  from disciplina, prova, aluno where aluno_idaluno = idaluno like ?";
         try {
             pst = conexao.prepareStatement(sql);
             
@@ -45,9 +45,9 @@ public class ListaProva extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
 }
-    /*
-     private void pesquisaAluno2(){
-        String sql ="select * from turma where idturma like ?";
+    
+     private void pesquisaProva2(){
+        String sql ="select aluno.idaluno as ID_Aluno, aluno.nome as Nome, disciplina.nome as Disciplina, prova.nota as Nota  from disciplina, prova, aluno where aluno_idaluno = aluno.nome like ?";
         try {
             pst = conexao.prepareStatement(sql);
             
@@ -60,7 +60,7 @@ public class ListaProva extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
 }
-    */
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,7 +73,7 @@ public class ListaProva extends javax.swing.JInternalFrame {
 
         txtPesquisa = new javax.swing.JTextField();
         comboPesquisa = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         tabProva = new javax.swing.JTable();
 
         setClosable(true);
@@ -94,18 +94,16 @@ public class ListaProva extends javax.swing.JInternalFrame {
         comboPesquisa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         comboPesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID:", "Nome:" }));
 
+        tabProva.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tabProva.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID_Aluno", "Nome", "Disciplina", "Nota"
             }
         ));
-        jScrollPane1.setViewportView(tabProva);
+        jScrollPane2.setViewportView(tabProva);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,11 +115,11 @@ public class ListaProva extends javax.swing.JInternalFrame {
                         .addGap(63, 63, 63)
                         .addComponent(comboPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(50, 50, 50)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,9 +128,9 @@ public class ListaProva extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -152,14 +150,14 @@ public class ListaProva extends javax.swing.JInternalFrame {
         if(comboPesquisa.getSelectedIndex() == 0){
            pesquisaProva1();
         }else{
-            pesquisaProva1();
+            pesquisaProva2();
         }
     }//GEN-LAST:event_txtPesquisaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> comboPesquisa;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tabProva;
     private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables

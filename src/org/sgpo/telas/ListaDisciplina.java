@@ -32,7 +32,7 @@ public class ListaDisciplina extends javax.swing.JInternalFrame {
     }
     
     private void pesquisaDisciplina1(){
-        String sql ="select * from disciplina where nome like ?";
+        String sql ="SELECT disciplina.iddisciplina as ID,disciplina.nome as Disciplina,curso.nome as Curso,disciplina.obs as Obs from disciplina,curso where disciplina.iddisciplina like ? ";
         try {
             pst = conexao.prepareStatement(sql);
             
@@ -47,7 +47,7 @@ public class ListaDisciplina extends javax.swing.JInternalFrame {
 }
     
      private void pesquisaDisciplina2(){
-        String sql ="select * from disciplina where iddisciplina like ?";
+        String sql ="SELECT disciplina.iddisciplina as ID,disciplina.nome as Disciplina,curso.nome as Curso,disciplina.obs as Obs from disciplina,curso where disciplina.nome like ?";
         try {
             pst = conexao.prepareStatement(sql);
             
@@ -60,7 +60,21 @@ public class ListaDisciplina extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
 }
-
+     // pesqiui
+    private void pesquisaDisciplina3(){
+        String sql ="SELECT disciplina.iddisciplina as ID,disciplina.nome as Disciplina,curso.nome as Curso,disciplina.obs as Obs from disciplina,curso where curso.nome like ?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            
+            pst.setString(1, txtPesquisa.getText() + "%");
+            
+            rs = pst.executeQuery();
+            
+            tabDisciplina.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,17 +105,14 @@ public class ListaDisciplina extends javax.swing.JInternalFrame {
         });
 
         comboPesquisa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        comboPesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID:", "Nome:" }));
+        comboPesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID:", "Disciplina:", "Curso:" }));
 
         tabDisciplina.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(tabDisciplina);
@@ -149,10 +160,13 @@ public class ListaDisciplina extends javax.swing.JInternalFrame {
 
         }*/
         if(comboPesquisa.getSelectedIndex() == 0){
+            pesquisaDisciplina1();
+        }else if(comboPesquisa.getSelectedIndex() == 1)
+        {
             pesquisaDisciplina2();
         }else{
-            pesquisaDisciplina1();
-        }
+          pesquisaDisciplina3();
+    }
     }//GEN-LAST:event_txtPesquisaKeyReleased
 
 

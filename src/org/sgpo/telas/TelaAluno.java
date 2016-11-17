@@ -15,14 +15,14 @@ import org.sgpo.dal.ModuloConexao;
 /**
  * Documentação da Classe org.sgpo.telas.TelaAluno
  *
- * @Baldina
- * @Fernando
- * @Fábio
- * @Maquinha
- * @Lina
- * @Lidia
- * @Josias
- * @Ernesto
+ * @author Baldina
+ * @author Fernando
+ * @author Fábio
+ * @author Maquinha
+ * @author Lina
+ * @author Lidia
+ * @author Josias
+ * @author Ernesto
  * @version 1.0 Copyrigt 2016
  */
 public final class TelaAluno extends javax.swing.JInternalFrame {
@@ -43,14 +43,18 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
         this.comboBusca2();
         this.comboBusca3();
         setaNaText();
+        setaNaText2();
+        setaNaText3();
     }
 
     /**
-     * @param comboBusca 
-     * Este Metódo Busca Dados da Tabela Turma e insere em
-     * uma ComoBox(comboTurmaAluno)
+     * @param comboBusca
      */
     public void comboBusca() {
+        /*
+        Este Metódo Busca Dados da Tabela Turma e insere em
+     uma ComoBox(comboTurmaAluno)
+         */
         String sql = "select * from turma";
 
         try {
@@ -86,9 +90,10 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
         }
     }
 
-    /*
-    @SetaNaText2
-    Este Metódo quando é chamado, seta um texto neste caso o nome da Universidade quando o ID é referenciado numa ComboBox(comboTurmaAluno)
+    /**
+     * @SetaNaText2 Este Metódo quando é chamado, seta um texto neste caso o
+     * nome da Universidade quando o ID é referenciado numa
+     * ComboBox(comboTurmaAluno)
      */
     public void setaNaText2() {
         String sql = "select * from universidade where iduniversidade = ?";
@@ -107,9 +112,9 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
         }
     }
 
-    /*
-    @SetaNaText
-    Este Metódo quando é chamado, seta um texto neste caso o nome da Curso quando o ID é referenciado numa ComboBox(comboTurmaAluno)
+    /**
+     * @SetaNaText Este Metódo quando é chamado, seta um texto neste caso o nome
+     * da Curso quando o ID é referenciado numa ComboBox(comboTurmaAluno)
      */
     public void setaNaText3() {
         String sql = "select * from curso where idcurso = ?";
@@ -125,9 +130,9 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
         }
     }
 
-    /*
-    *   @ComboBusca2;
-    *   Este Metódo Busca Dados da Tabela Turma e insere em uma ComoBox(comboTurmaAluno)
+    /**
+     * @ComboBusca2; Este Metódo Busca Dados da Tabela Turma e insere em uma
+     * ComoBox(comboTurmaAluno)
      */
     public void comboBusca2() {
         String sql = "select * from universidade";
@@ -750,7 +755,7 @@ public final class TelaAluno extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         setaNaText();
         setaNaText2();
-        setaNaText2();
+        setaNaText3();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void comboTurmaAlunoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboTurmaAlunoItemStateChanged
